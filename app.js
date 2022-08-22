@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+const userRoutes = require('./routes/user')
+
+app.use("/api/user", userRoutes)
 
 app.listen(port, (err) => {
     if (err) {
