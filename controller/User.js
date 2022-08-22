@@ -66,11 +66,24 @@ const getUsers = () => {
     })
   }
 
+  const findUserById = (userId) => {
+    return new Promise(async (resolve, reject)=> {
+      try {
+        const user = await User.findById(userId)
+        resolve(user)
+      } catch (error) {
+        reject(error)
+      }
+
+    })
+  }
+
 
 module.exports ={
     createUser,
     getUserRole,
     userlogin,
     getUsers,
-    getUserByEmail
+    getUserByEmail,
+    findUserById
 }
