@@ -60,5 +60,22 @@ router.post("/logout", userAuth, async(req, res)=> {
     }
     
 })
+router.put("/update", userAuth, async (req, res) => {
+    const allowedUpdates = ["firstName", "lastName", "email", "password"]
+    const updates = Object.keys(req.body)
+    const isValidUpdate = updates.every((item) => allowedUpdates.includes(item))
+    if(!isValidUpdate) {
+        return res.status(400).send({message:"Update failed"})
+    }
+    try {
+        const user = req.user
+        const updateData = req.body
+        updates.forEach((update)=> user[update] = updateData[update])
+        const updatedUser = await user.save()
+        res.send(updatedUser)
+    } catch (error) {
+        
+    }
+})
 
 module.exports = router
