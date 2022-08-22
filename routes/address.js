@@ -61,5 +61,15 @@ router.put("/update-address/:id", userAuth, async(req, res) => {
      
 })
 
+router.delete("/delete-address/:id", userAuth, async(req, res) => {
+    const addressId = req.params.id
+    try {
+        const deletedAdress = await AddressController.deleteAdressById(addressId)
+        res.status(200).send({message:"Success", deletedAdress})    
+    } catch (error) {
+        
+    }
+    
+})
 
 module.exports = router

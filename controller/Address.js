@@ -37,8 +37,21 @@ const updatedAddressByCustomerId = (addressId, updateData) => {
     })
 }
 
+const deleteAdressById = (addressId) => {
+    return new Promise (async (resolve, reject)=>{
+        Address.findByIdAndDelete({_id:addressId}, (err, deleted)=> {
+            if(err){
+                console.log(err);
+                reject({status:false, message:"Delete failed"})
+            }
+            resolve(deleted)
+
+        })
+    })
+}
 module.exports = {
     createAddress,
     getAddressById,
-    updatedAddressByCustomerId
+    updatedAddressByCustomerId,
+    deleteAdressById
 }
