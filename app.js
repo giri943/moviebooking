@@ -13,8 +13,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const userRoutes = require('./routes/user')
+const addressRoutes = require('./routes/address')
 
 app.use("/api/user", userRoutes)
+app.use("/api/address", addressRoutes)
 
 app.listen(port, (err) => {
     if (err) {
