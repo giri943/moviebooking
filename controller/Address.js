@@ -24,7 +24,21 @@ const getAddressById = (userId) =>{
     })
 }
 
+const updatedAddressByCustomerId = (addressId, updateData) => {
+    return new Promise(async (resolve, reject) =>{
+        Address.findByIdAndUpdate({_id:addressId}, {...updateData},{new:true}, (err, updated)=> {
+            if(err) {
+                console.log(err);
+                reject({status: false, message: "Couldn't update the Address"})
+            }
+            //console.log(updated);
+            resolve(updated)
+        })
+    })
+}
+
 module.exports = {
     createAddress,
-    getAddressById
+    getAddressById,
+    updatedAddressByCustomerId
 }

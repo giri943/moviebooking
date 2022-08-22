@@ -27,5 +27,39 @@ router.get("/get-address", userAuth, async(req, res) => {
     }
 })
 
+router.put("/update-address/:id", userAuth, async(req, res) => {
+    const addressId = req.params.id
+    const updateData = req.body
+    if(!updateData.name){
+       return res.status(400).send({message:"Please Provide the name"})
+    }
+    if(!updateData.contactNumber){
+        return res.status(400).send({message:"Please Provide the Contact number"})
+    }
+    if(!updateData.street){
+        return res.status(400).send({message:"Please Provide the Street name"})
+    }
+    if(!updateData.landmark){
+        return res.status(400).send({message:"Please Provide the Landmark"})
+    }
+    if(!updateData.city){
+        return res.status(400).send({message:"Please Provide the city"})
+    }
+    if(!updateData.state){
+        return res.status(400).send({message:"Please Provide the state"})
+    }
+    if(!updateData.zipcode){
+        return res.status(400).send({message:"Please Provide the zipcode"})
+    }
+    try {
+        const updatedAddress = await AddressController.updatedAddressByCustomerId(addressId, updateData)
+        res.status(200).send({message:"success", updatedAddress})
+    } catch (error) {
+        
+    }
+
+     
+})
+
 
 module.exports = router
